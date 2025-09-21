@@ -1,0 +1,234 @@
+:root {
+  --size: 140px;
+  --progress-color: #0ea5a4; /* teal */
+  --track-color: #e6f6f6; /* light track */
+  --inner-gap: 20px;
+  --default-font-size: 24px;
+}
+body {
+  font-size: var(--default-font-size);
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+}
+h1 {
+  text-align: center;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: normal;
+  text-align: center;
+  width: 94.5%;
+}
+main {
+  display: grid;
+  grid-template-columns: 60% auto;
+  border: 2px solid black;
+  border-radius: 20px;
+  width: 60%;
+  justify-self: center;
+  padding: 15px 0;
+}
+.form-container {
+  padding: 0;
+  margin: 0;
+}
+.signup-form {
+  display: grid;
+  justify-content: stretch;
+  padding: 25px;
+}
+
+.btn-submit {
+  margin-top: 30px;
+  max-width: 300px;
+  height: 50px;
+  justify-self: stretch;
+  background: #000;
+  color: #fff;
+  font-size: var(--default-font-size);
+}
+label {
+  max-width: 600px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+input {
+  max-width: 600px;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 10px;
+  outline: none;
+  padding: 0 10px;
+}
+.email-error {
+  font-size: 16px;
+}
+
+.email-input {
+  border: 2px solid red;
+}
+
+.color-red {
+  color: red;
+}
+.progress-tracker {
+  padding-top: 30px;
+}
+.progress-list {
+  background: #e5e5e5;
+  border-radius: 15px;
+  margin-right: 20px;
+  padding-bottom: 20px;
+}
+.task-list {
+  list-style-type: none;
+  padding: 15px;
+}
+
+.task-list li {
+  padding: 5px 0;
+  font-size: 16px;
+}
+
+.completed-task {
+  color: #a9a9a9;
+  text-decoration: line-through;
+}
+.progress-circle {
+  width: auto;
+  height: auto;
+  aspect-ratio: 1/1;
+  background-color: conic-gradient(
+    /* Apply the progress color for the percentage */ hotpink
+      calc(var(--percentage) * 3.6%),
+    /* 100% = 360 degrees */ /* The rest is the remaining color */ pink 0
+  );
+  border: 2px solid black;
+  border-radius: 50%;
+  text-align: center;
+  position: relative;
+  margin: auto;
+  padding: 5px;
+}
+.progress-circle-value {
+  width: 80%; /* Adjust size to fit inside the circle */
+  height: 80%;
+  background-color: white; /* The background of the circle's inner part */
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the element */
+  display: grid; /* For centering text */
+  place-items: center; /* For centering text */
+  font-size: 1.2em;
+  color: #333;
+}
+.progress-circle {
+  --percentage: 0; /* fallback */
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: conic-gradient(
+    var(--progress-color) calc(var(--percentage) * 1%),
+    var(--track-color) 0
+  );
+  position: relative;
+}
+
+.progress-circle-value {
+  width: calc(100% - var(--inner-gap));
+  height: calc(100% - var(--inner-gap));
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #0f172a;
+}
+
+@media screen and (max-width: 767px) {
+  :root {
+    --size: 100px; /* shrink circle */
+    --inner-gap: 16px;
+    --default-font-size: 16px;
+  }
+
+  body {
+    font-size: var(--default-font-size);
+  }
+  main {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+  h2 {
+    font-size: 20px;
+    font-weight: normal;
+    text-align: center;
+    width: 94.5%;
+  }
+  .progress-tracker {
+    padding: 10px;
+  }
+
+  .progress-circle {
+    --percentage: 0; /* fallback */
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: conic-gradient(
+      var(--progress-color) calc(var(--percentage) * 1%),
+      var(--track-color) 0
+    );
+    position: relative;
+  }
+
+  .progress-circle-value {
+    width: calc(100% - var(--inner-gap));
+    height: calc(100% - var(--inner-gap));
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #0f172a;
+  }
+  .form-container {
+    align-items: center;
+    width: 100%;
+  }
+  .signup-form {
+    justify-self: stretch;
+    padding: 24px;
+  }
+  .signup-form label,
+  .signup-form input:not(.btn-submit),
+  .signup-form div {
+    max-width: 750px;
+  }
+  .btn-submit {
+    width: 250px;
+    justify-self: center;
+  }
+}
