@@ -3,34 +3,120 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Acceissble Form UI</title>
+    <link rel="stylesheet" href="styles.css" />
+    <title>Accessible Form UI</title>
   </head>
   <body>
     <header>
       <h1>Accessible Form UI</h1>
     </header>
     <main>
-      <section>
-        <form action="">
+      <section class="form-container">
+        <form action="#" class="signup-form">
           <label for="full-name">Full Name</label>
-          <input type="text" name="full-name" id="" />
+          <input
+            type="text"
+            id="full-name"
+            name="full-name"
+            placeholder="What should we call you?"
+          />
+          <div class="name-error" role="alert" aria-live="assertive"></div>
+
           <label for="email">Email</label>
-          <input type="email" name="email" id="" />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            class="color-red"
+            value="joh@doe.com"
+            aria-required="true"
+            aria-describedby="email-error"
+            aria-invalid="true"
+            autocomplete="email"
+            required
+          />
+          <div
+            id="email-error"
+            class="field-error"
+            role="alert"
+            aria-live="assertive"
+          >
+            <!-- small SVG icon + text — gives a non-color cue -->
+            <svg
+              class="error-icon"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M11.001 10h2v5h-2zM11 16h2v2h-2zM12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2z"
+              />
+            </svg>
+            <span class="error-text">Email is already taken</span>
+          </div>
+
           <label for="pwd">Password</label>
-          <input type="password" name="pwd" id="" />
-          <label for="conf-pwd"></label>
-          <input type="password" name="conf-pwd" id="" />
-          <input type="submit" value="Update Profile" />
+          <input
+            type="password"
+            name="pwd"
+            id="pwd"
+            placeholder="xxxxxxxx"
+            aria-required="true"
+            aria-describedby="pwd-error"
+            aria-invalid="false"
+            required
+          />
+          <div class="pwd-error" role="alert" aria-live="assertive"></div>
+          <label for="conf-pwd">Confirm Password</label>
+          <input
+            type="password"
+            name="conf-pwd"
+            id="conf-pwd"
+            placeholder="xxxxxxxx"
+            aria-required="true"
+            required
+          />
+          <div
+            id="conf-pwd-error"
+            class="field-error conf-pwd-error"
+            role="alert"
+            aria-live="assertive"
+          ></div>
+
+          <input type="submit" value="Update Profile" class="btn-submit" />
         </form>
       </section>
-      <section>
-        <div></div>
+      <section class="progress-tracker">
+        <!-- <progress
+          class="progress-circle"
+          style="--percentage: 65"
+          min="0"
+          max="100"
+          value="65"
+        >
+          65%
+        </progress> -->
+        <div
+          class="progress-circle"
+          style="--percentage: 65"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="65"
+          aria-valuetext="65% complete"
+          aria-label="Profile completion"
+        >
+          <div class="progress-circle-value">65%</div>
+        </div>
         <h2>Profile Completeness</h2>
-        <div>
-          <ul>
-            <li>Create Account</li>
-            <li>Update Roadmap Progress</li>
-            <li>Setup Public Profile</li>
+        <div class="progress-list">
+          <ul class="task-list">
+            <li class="completed-task">Create Account</li>
+            <li class="completed-task">Update Roadmap Progress</li>
+            <li class="completed-task">Setup Public Profile</li>
             <li>Complete Your First Project</li>
             <li>Invite Your Friends</li>
           </ul>

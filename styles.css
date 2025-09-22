@@ -3,7 +3,8 @@
   --progress-color: #0ea5a4; /* teal */
   --track-color: #e6f6f6; /* light track */
   --inner-gap: 20px;
-  --default-font-size: 24px;
+  --default-font-size: 20px;
+  --black-border: 2px solid black;
 }
 body {
   font-size: var(--default-font-size);
@@ -33,7 +34,7 @@ h2 {
 main {
   display: grid;
   grid-template-columns: 60% auto;
-  border: 2px solid black;
+  border: var(--black-border);
   border-radius: 20px;
   width: 60%;
   justify-self: center;
@@ -67,17 +68,13 @@ label {
 input {
   max-width: 600px;
   height: 40px;
-  font-size: 20px;
+  font-size: var(--default-font-size);
   border-radius: 10px;
   outline: none;
   padding: 0 10px;
 }
 .email-error {
   font-size: 16px;
-}
-
-.email-input {
-  border: 2px solid red;
 }
 
 .color-red {
@@ -107,7 +104,7 @@ input {
   text-decoration: line-through;
 }
 .progress-circle {
-  width: auto;
+  width: 100%;
   height: auto;
   aspect-ratio: 1/1;
   background-color: conic-gradient(
@@ -115,7 +112,7 @@ input {
       calc(var(--percentage) * 3.6%),
     /* 100% = 360 degrees */ /* The rest is the remaining color */ pink 0
   );
-  border: 2px solid black;
+  border: var(--black-border);
   border-radius: 50%;
   text-align: center;
   position: relative;
@@ -133,7 +130,7 @@ input {
   transform: translate(-50%, -50%); /* Center the element */
   display: grid; /* For centering text */
   place-items: center; /* For centering text */
-  font-size: 1.2em;
+  font-size: 1.5rem;
   color: #333;
 }
 .progress-circle {
@@ -163,7 +160,7 @@ input {
   color: #0f172a;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (min-width: 509px) and (max-width: 767px) {
   :root {
     --size: 100px; /* shrink circle */
     --inner-gap: 16px;
@@ -177,46 +174,23 @@ input {
     display: grid;
     grid-template-columns: 1fr;
     width: 100%;
+    padding: 0;
   }
   h2 {
-    font-size: 20px;
+    font-size: var(--default-font-size);
     font-weight: normal;
     text-align: center;
     width: 94.5%;
   }
   .progress-tracker {
-    padding: 10px;
+    margin: 10px;
+    width: 100%;
   }
 
-  .progress-circle {
-    --percentage: 0; /* fallback */
-    width: var(--size);
-    height: var(--size);
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: conic-gradient(
-      var(--progress-color) calc(var(--percentage) * 1%),
-      var(--track-color) 0
-    );
-    position: relative;
-  }
-
-  .progress-circle-value {
-    width: calc(100% - var(--inner-gap));
-    height: calc(100% - var(--inner-gap));
-    background: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 1rem;
-    color: #0f172a;
-  }
   .form-container {
     align-items: center;
-    width: 100%;
+    width: 60%;
+    margin: auto;
   }
   .signup-form {
     justify-self: stretch;
@@ -231,4 +205,84 @@ input {
     width: 250px;
     justify-self: center;
   }
+}
+
+@media screen and (max-width: 508px) {
+  main {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    padding: 0;
+  }
+  .form-container {
+    align-items: center;
+    width: 80%;
+    margin: auto;
+  }
+}
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  outline: none; /* remove default outline */
+  border-color: #0ea5a4; /* teal border on focus */
+  box-shadow: 0 0 0 3px rgba(14, 165, 164, 0.3); /* visible teal halo */
+  transition:
+    box-shadow 160ms ease,
+    border-color 160ms ease;
+}
+
+/* Submit button */
+input[type="submit"]:focus {
+  outline: none;
+  border: 2px solid #0ea5a4;
+  box-shadow: 0 0 0 3px rgba(14, 165, 164, 0.3);
+  transform: translateY(-1px);
+  transition:
+    box-shadow 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  input[type="submit"]:focus {
+    transform: none;
+    transition: none;
+  }
+}
+.field-error {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #b91c1c; /* dark red for contrast */
+  background: rgba(185, 28, 28, 0.06); /* subtle tinted background */
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.95rem;
+  margin-top: 8px;
+  max-width: 600px;
+}
+
+/* Inline error icon inherits currentColor */
+.error-icon {
+  flex: 0 0 auto;
+  color: #b91c1c;
+}
+
+/* Make invalid input clearly visible (non-color cue: thick border + halo) */
+input[aria-invalid="true"] {
+  border: 3px solid #b91c1c;
+  box-shadow: 0 0 0 6px rgba(185, 28, 28, 0.08);
+  outline: none;
+}
+
+/* Small tweak to ensure error-text remains readable */
+.field-error .error-text {
+  color: #7f1d1d;
+  line-height: 1;
 }
